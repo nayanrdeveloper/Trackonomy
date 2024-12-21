@@ -2,9 +2,16 @@ import { Stack } from "expo-router";
 import "../global.css";
 
 export default function RootLayout() {
-  return (<Stack>
-    <Stack.Screen name="(tabs)" options={{
-      headerShown: false
-    }} />
-  </Stack>);
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      {/* Onboarding */}
+      <Stack.Screen name="onBoarding/onBoardingScreen" options={{ title: "Onboarding" }} />
+
+      {/* Authentication */}
+      <Stack.Screen name="auth/login" options={{ title: "Login" }} />
+
+      {/* Home */}
+      <Stack.Screen name="home" options={{ title: "Home", headerShown: false }} />
+    </Stack>
+  );
 }
