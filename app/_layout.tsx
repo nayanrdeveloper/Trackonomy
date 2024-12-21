@@ -9,6 +9,8 @@ export default function RootLayout() {
 
       {/* Authentication */}
       <Stack.Screen name="auth/login" options={{ title: "Login" }} />
+      <Stack.Screen name="auth/registration" options={{ title: "Registration" }} />
+      <Stack.Screen name="auth/otpVerification" options={{ title: "OTP Verification" }} />
 
       {/* Home */}
       <Stack.Screen name="home" options={{ title: "Home", headerShown: false }} />
