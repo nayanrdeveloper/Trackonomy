@@ -50,12 +50,12 @@ export default function OnboardingScreen() {
     if (currentSlide < onboardingData.length - 1) {
       setCurrentSlide(currentSlide + 1);
     } else {
-        router.replace("/auth/login");
+        router.replace("/auth/registration");
     }
   };
 
   const handleSkip = () => {
-    router.replace("/auth/login");
+    router.replace("/auth/registration");
   };
 
   return (
