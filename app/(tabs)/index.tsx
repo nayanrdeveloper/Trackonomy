@@ -8,7 +8,7 @@ export default function Index() {
     >
       <Text style={styles.text}>Trackonoy Home Screen.</Text>
       <Link style={styles.button} href="/(tabs)/about">
-        <Text>Go to About</Text>
+        <Text className="text-yellow-500 bg-green-800 p-4 m-4">Go to About</Text>
         </Link>
     </View>
   );
