@@ -1,17 +1,17 @@
-import { TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 interface BackButtonProps {
-  classname?: string;
+    classname?: string;
 }
 
 export default function BackButton({ classname }: BackButtonProps) {
     const router = useRouter();
-  return (
-    <TouchableOpacity onPress={() => router.back()} className={classname}>
-      <Ionicons name="arrow-back" color={'white'} size={30} />
-    </TouchableOpacity>
-  )
+    return (
+        <TouchableOpacity onPress={() => router.back()} className={classname}>
+            <Ionicons name="arrow-back" color={'white'} size={30} />
+        </TouchableOpacity>
+    );
 }
