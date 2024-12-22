@@ -1,3 +1,4 @@
+import { useGetExpensesQuery } from '@/src/redux/expense/expenseApi';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -72,6 +73,8 @@ const transactions = [
 
 export default function RecentTransactions() {
     const router = useRouter();
+    const { data: expenses, isLoading, isError, error } = useGetExpensesQuery();
+    console.log(expenses);
     return (
         <View className="flex-1 bg-darkBg px-4 pt-6">
             {/* Header */}
