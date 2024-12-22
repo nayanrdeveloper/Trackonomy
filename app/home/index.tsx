@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
+  const router = useRouter();
   type Transaction = {
     id: string;
     title: string;
@@ -59,7 +61,7 @@ export default function HomeScreen() {
       <View>
         <View className="flex-row justify-between items-center mb-4">
           <Text className="text-white text-lg font-bold">Recent Transactions</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {router.push("/transactions")}}>
             <Text className="text-teal-400 text-sm font-bold">View all</Text>
           </TouchableOpacity>
         </View>

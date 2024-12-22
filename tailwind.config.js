@@ -8,10 +8,14 @@ module.exports = {
         darkBg: "#212129",
         gray: {
           800: "#2D3748",
+          900: "#1F2937",
           500: "#A0AEC0",
         },
         teal: {
           400: "#38B2AC",
+        },
+        red: {
+          500: "#E53E3E",
         },
       },
       spacing: {
