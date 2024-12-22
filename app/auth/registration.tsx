@@ -1,8 +1,11 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import BackButton from '@/src/components/common/BackButton';
+import PrimaryInput from '@/src/components/common/PrimaryInput';
+import PrimaryButton from '@/src/components/common/PrimaryButton';
+import { COMMON_CONSTANTS, REGISTER_SCREEN } from '@/src/constants';
 
 export default function RegisterScreen() {
     const router = useRouter();
@@ -21,59 +24,48 @@ export default function RegisterScreen() {
                     resizeMode="contain"
                 />
                 <Text className="text-teal-400 text-lg font-bold">
-                    Money tracker
+                    {COMMON_CONSTANTS.APP.NAME}
                 </Text>
             </View>
 
             {/* Form */}
             <View className="bg-[#2B2B33] rounded-3xl p-6">
                 <Text className="text-white text-lg font-bold text-center mb-2">
-                    Register
+                    {REGISTER_SCREEN.HEADER.TITLE}
                 </Text>
                 <Text className="text-gray-400 text-center mb-6">
-                    Welcome, please create your account using your mobile number
+                    {REGISTER_SCREEN.HEADER.SUBTITLE}
                 </Text>
 
                 {/* Input Fields */}
-                <View className="bg-gray-700 rounded-xl px-3 py-2 mb-4">
-                    <TextInput
-                        placeholder="Enter user name"
+                <View className="gap-y-3">
+                    <PrimaryInput
+                        placeholder={REGISTER_SCREEN.FORM.USERNAME_PLACEHOLDER}
                         placeholderTextColor="#A0AEC0"
-                        className="text-white"
                         value={username}
                         onChangeText={setUsername}
                     />
-                </View>
-                <View className="bg-gray-700 rounded-xl px-3 py-2 mb-4">
-                    <TextInput
-                        placeholder="Enter your mobile number"
+                    <PrimaryInput
+                        placeholder={REGISTER_SCREEN.FORM.MOBILE_PLACEHOLDER}
                         placeholderTextColor="#A0AEC0"
                         keyboardType="phone-pad"
-                        className="text-white"
                         value={mobileNumber}
                         onChangeText={setMobileNumber}
                     />
-                </View>
-                <View className="bg-gray-700 rounded-xl px-3 py-2 mb-6">
-                    <TextInput
-                        placeholder="Enter email address"
+                    <PrimaryInput
+                        placeholder={REGISTER_SCREEN.FORM.EMAIL_PLACEHOLDER}
                         placeholderTextColor="#A0AEC0"
                         keyboardType="email-address"
-                        className="text-white"
                         value={email}
                         onChangeText={setEmail}
+                    />
+                    <PrimaryButton
+                        title={REGISTER_SCREEN.BUTTON.REGISTER}
+                        onPress={() => router.push('/auth/otpVerification')}
                     />
                 </View>
 
                 {/* Register Button */}
-                <TouchableOpacity
-                    className="bg-teal-400 rounded-md py-3"
-                    onPress={() => router.push('/auth/otpVerification')}
-                >
-                    <Text className="text-white text-center font-bold text-lg">
-                        Register
-                    </Text>
-                </TouchableOpacity>
             </View>
         </View>
     );

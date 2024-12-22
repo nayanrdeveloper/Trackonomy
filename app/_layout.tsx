@@ -1,35 +1,22 @@
-import { Stack } from 'expo-router';
-import '../global.css';
+import { Stack } from "expo-router";
+import { ROUTES } from "@/src/constants/routes";
+import "../global.css";
 
 export default function RootLayout() {
-    return (
-        <Stack screenOptions={{ headerShown: false }}>
-            {/* Onboarding */}
-            <Stack.Screen
-                name="onBoarding/onBoardingScreen"
-                options={{ title: 'Onboarding' }}
-            />
+  const allRoutes = [
+    ...ROUTES.AUTH,
+    ...ROUTES.MAIN,
+  ];
 
-            {/* Authentication */}
-            <Stack.Screen name="auth/login" options={{ title: 'Login' }} />
-            <Stack.Screen
-                name="auth/registration"
-                options={{ title: 'Registration' }}
-            />
-            <Stack.Screen
-                name="auth/otpVerification"
-                options={{ title: 'OTP Verification' }}
-            />
-            <Stack.Screen
-                name="transactions"
-                options={{ title: 'Transactions' }}
-            />
-
-            {/* Home */}
-            <Stack.Screen
-                name="home"
-                options={{ title: 'Home', headerShown: false }}
-            />
-        </Stack>
-    );
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      {allRoutes.map((route) => (
+        <Stack.Screen
+          key={route.name}
+          name={route.name}
+          options={route.options}
+        />
+      ))}
+    </Stack>
+  );
 }
