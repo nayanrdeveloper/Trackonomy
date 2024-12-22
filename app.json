@@ -1,50 +1,50 @@
 {
-  "expo": {
-    "name": "Trackonomy",
-    "slug": "Trackonomy",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/money_icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/money_icon.png",
-        "backgroundColor": "#212129"
-      },
-      "package": "com.nayanrdeveloper.Trackonomy"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/money_icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#38B2AC"
+    "expo": {
+        "name": "Trackonomy",
+        "slug": "Trackonomy",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/money_icon.png",
+        "scheme": "myapp",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": true,
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/money_icon.png",
+                "backgroundColor": "#212129"
+            },
+            "package": "com.nayanrdeveloper.Trackonomy"
+        },
+        "web": {
+            "bundler": "metro",
+            "output": "static",
+            "favicon": "./assets/images/favicon.png"
+        },
+        "plugins": [
+            "expo-router",
+            [
+                "expo-splash-screen",
+                {
+                    "image": "./assets/images/money_icon.png",
+                    "imageWidth": 200,
+                    "resizeMode": "contain",
+                    "backgroundColor": "#38B2AC"
+                }
+            ]
+        ],
+        "experiments": {
+            "typedRoutes": true
+        },
+        "extra": {
+            "router": {
+                "origin": false
+            },
+            "eas": {
+                "projectId": "0cc1b7e8-0ee8-488b-9c92-f1838a3ad147"
+            }
         }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "0cc1b7e8-0ee8-488b-9c92-f1838a3ad147"
-      }
     }
-  }
 }
