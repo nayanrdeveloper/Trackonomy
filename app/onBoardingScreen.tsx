@@ -10,35 +10,35 @@ const onboardingData = [
         title: 'Effortlessly Manage Your Expenses and Income',
         description:
             'Gain full control over your finances by categorizing your expenses and tracking your income seamlessly. Stay informed and organized with ease.',
-        image: require('../../assets/images/save_money.png'),
+        image: require('../assets/images/save_money.png'),
     },
     {
         id: 2,
         title: 'Save Money and Achieve Your Financial Goals',
         description:
             'Set savings goals, track your progress, and build financial discipline. Achieve your dreams with smarter money management.',
-        image: require('../../assets/images/goal.png'),
+        image: require('../assets/images/goal.png'),
     },
     {
         id: 3,
         title: 'Leverage AI to Manage Your Expenses',
         description:
             'Utilize advanced AI insights to analyze spending patterns, provide personalized recommendations, and help you make informed financial decisions.',
-        image: require('../../assets/images/money_ai.png'),
+        image: require('../assets/images/money_ai.png'),
     },
     {
         id: 4,
         title: 'Stay Informed with Real-Time Updates',
         description:
             'Monitor your transactions and budgets in real-time. Stay updated on where your money is going, anytime, anywhere.',
-        image: require('../../assets/images/reat_time_update.png'),
+        image: require('../assets/images/reat_time_update.png'),
     },
     {
         id: 5,
         title: 'Make Smarter Decisions with Analytics',
         description:
             'Analyze your spending habits with easy-to-understand graphs and charts. Make data-driven decisions to improve your financial health.',
-        image: require('../../assets/images/money_anayltics.png'),
+        image: require('../assets/images/money_anayltics.png'),
     },
 ];
 
@@ -51,6 +51,12 @@ export default function OnboardingScreen() {
             setCurrentSlide(currentSlide + 1);
         } else {
             router.replace('/auth/registration');
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentSlide > 0) {
+            setCurrentSlide(currentSlide - 1);
         }
     };
 
@@ -92,14 +98,31 @@ export default function OnboardingScreen() {
                         />
                     ))}
                 </View>
-                <TouchableOpacity
-                    onPress={handleNext}
-                    className="bg-teal-400 py-3 rounded-lg"
-                >
-                    <Text className="text-center text-white font-bold text-lg">
-                        Next
-                    </Text>
-                </TouchableOpacity>
+                <View className="flex-row justify-between px-4 mt-4 gap-x-4">
+                    <TouchableOpacity
+                        onPress={handlePrevious}
+                        disabled={currentSlide === 0}
+                        className={`flex-1 items-center justify-center rounded-lg py-3 ${
+                            currentSlide === 0
+                                ? 'bg-teal-400 opacity-50'
+                                : 'bg-teal-400'
+                        }`}
+                    >
+                        <Text className="text-white font-bold text-lg">
+                            Previous
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={handleNext}
+                        className="flex-1 items-center justify-center rounded-lg py-3 bg-teal-400"
+                    >
+                        <Text className="text-white font-bold text-lg">
+                            {currentSlide === onboardingData.length - 1
+                                ? 'Finish'
+                                : 'Next'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
