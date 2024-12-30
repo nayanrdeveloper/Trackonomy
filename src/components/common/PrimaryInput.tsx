@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 interface InputProps {
@@ -28,13 +28,21 @@ const PrimaryInput: React.FC<InputProps> = ({
     multiline = false,
     maxLength,
 }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <View className="mb-4">
             {label && (
                 <Text className="text-white font-bold mb-2">{label}</Text>
             )}
             <TextInput
-                className="bg-gray-700 text-white text-base rounded-xl px-4 py-3"
+                className={`bg-gray-700 text-white text-base rounded-xl px-4 py-3 ${
+                    errorMessage
+                        ? 'border border-red-500' // Error state
+                        : isFocused
+                          ? 'border border-teal-400' // Focus state
+                          : '' // Default state (no border)
+                }`}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
                 value={value}
@@ -44,6 +52,8 @@ const PrimaryInput: React.FC<InputProps> = ({
                 editable={editable}
                 multiline={multiline}
                 maxLength={maxLength}
+                onFocus={() => setIsFocused(true)} // Set focus state
+                onBlur={() => setIsFocused(false)} // Reset focus state
             />
             {errorMessage && (
                 <Text className="text-red-500 text-sm mt-1">
