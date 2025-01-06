@@ -3,16 +3,23 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { setToken } from '@/src/redux/auth/authSlice';
+import { useConnectivity } from '../hooks/useConnectivity';
 
 const AppInitializer: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
     const router = useRouter();
     const dispatch = useDispatch();
+    const isConnected = useConnectivity();
 
     useEffect(() => {
-        const checkToken = async () => {
-            try {
+        const initializeApp = async () => {
+            if (isConnected === false) {
+                router.replace('/nointernetscreen');
+                return;
+            }
+
+            if (isConnected === true) {
                 const token = await AsyncStorage.getItem('authToken');
                 if (token) {
                     dispatch(setToken(token));
@@ -20,14 +27,16 @@ const AppInitializer: React.FC<{ children: React.ReactNode }> = ({
                 } else {
                     router.replace('/auth/login');
                 }
-            } catch (error) {
-                console.error('Error checking token:', error);
-                router.replace('/auth/login');
             }
         };
 
-        checkToken();
+        initializeApp();
     }, [dispatch, router]);
+
+    if (isConnected === null) {
+        console.log('Checking internet connection...');
+        return null;
+    }
 
     return <>{children}</>;
 };

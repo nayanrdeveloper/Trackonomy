@@ -1,3 +1,4 @@
+import DateTimePickerModal from '@/src/components/common/modals/DateTimePickerModal';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRouter } from 'expo-router';
@@ -31,6 +32,14 @@ export default function EditTransaction() {
     const handleSelectType = (selectedType: string) => {
         setType(selectedType);
         setModalVisible(false); // Close modal after selection
+    };
+
+    const openDatePicker = () => setDatePickerVisible(true);
+    const closeDatePicker = () => setDatePickerVisible(false);
+
+    const handleDateConfirm = (selectedDate: Date) => {
+        setDate(selectedDate);
+        closeDatePicker();
     };
 
     interface DatePickerEvent {
@@ -226,51 +235,13 @@ export default function EditTransaction() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                {isDatePickerVisible && Platform.OS === 'ios' && (
-                    <Modal
-                        transparent
-                        animationType="slide"
-                        visible={isDatePickerVisible}
-                        onRequestClose={() => setDatePickerVisible(false)}
-                    >
-                        <View style={styles.modalOverlay}>
-                            <View className="bg-gray-900 rounded-t-lg p-6">
-                                <Text className="text-white text-lg font-bold mb-4">
-                                    Select Date
-                                </Text>
-                                <DateTimePicker
-                                    value={date}
-                                    mode="date"
-                                    display="spinner"
-                                    onChange={(event, selectedDate) => {
-                                        setDate(selectedDate || date); // Handle date change
-                                    }}
-                                    textColor="#FFFFFF"
-                                />
-                                <View className="flex-row justify-between mt-6">
-                                    <TouchableOpacity
-                                        onPress={() =>
-                                            setDatePickerVisible(false)
-                                        }
-                                    >
-                                        <Text className="text-gray-400 font-bold text-lg">
-                                            CANCEL
-                                        </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
-                                        onPress={() =>
-                                            setDatePickerVisible(false)
-                                        }
-                                    >
-                                        <Text className="text-teal-500 font-bold text-lg">
-                                            OK
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </Modal>
-                )}
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    value={date}
+                    onConfirm={handleDateConfirm}
+                    onCancel={closeDatePicker}
+                />
 
                 {/* Transaction Account */}
                 <View className="mb-6">
