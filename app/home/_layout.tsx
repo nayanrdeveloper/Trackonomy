@@ -53,12 +53,12 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="about"
+                name="budgetlist"
                 options={{
-                    title: 'About',
+                    title: 'Budget',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons
-                            name="information-circle-outline"
+                            name="save-outline"
                             size={size}
                             color={color}
                         />
