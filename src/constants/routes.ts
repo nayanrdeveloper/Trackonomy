@@ -13,7 +13,10 @@ export const ROUTES = {
             options: { title: 'Onboarding' },
         },
         { name: 'transactions', options: { title: 'Transactions' } },
-        { name: 'nointernetscreen', options: { title: 'No Internet Connection' } },
+        {
+            name: 'nointernetscreen',
+            options: { title: 'No Internet Connection' },
+        },
         { name: 'home', options: { title: 'Home', headerShown: false } },
     ],
 };
