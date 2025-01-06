@@ -38,10 +38,10 @@ const PrimaryInput: React.FC<InputProps> = ({
             <TextInput
                 className={`bg-gray-700 text-white text-base rounded-xl px-4 py-3 ${
                     errorMessage
-                        ? 'border border-red-500' // Error state
+                        ? 'border border-red-500'
                         : isFocused
-                          ? 'border border-teal-400' // Focus state
-                          : '' // Default state (no border)
+                          ? 'border border-teal-400'
+                          : ''
                 }`}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
@@ -52,8 +52,8 @@ const PrimaryInput: React.FC<InputProps> = ({
                 editable={editable}
                 multiline={multiline}
                 maxLength={maxLength}
-                onFocus={() => setIsFocused(true)} // Set focus state
-                onBlur={() => setIsFocused(false)} // Reset focus state
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
             />
             {errorMessage && (
                 <Text className="text-red-500 text-sm mt-1">
