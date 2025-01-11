@@ -8,13 +8,34 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import PrimaryInput from '@/src/components/common/PrimaryInput';
+import DateTimePickerModal from '@/src/components/common/modals/DateTimePickerModal';
+import CategoryPickerModal, {
+    Category,
+} from '@/src/components/common/modals/CategoryPickerModal';
 
 export default function AddExpenseScreen() {
     const router = useRouter();
     const [amount, setAmount] = useState('');
-    const [category, setCategory] = useState('');
-    const [date, setDate] = useState('23 Jul, 2024'); // Default date
+    const [isCategoryModalVisible, setCategoryModalVisible] = useState(false);
+    const [category, setCategory] = useState<Category | null>(null);
+    const [date, setDate] = useState(new Date('2024-07-12'));
+    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
+
+    const openDatePicker = () => setDatePickerVisible(true);
+    const closeDatePicker = () => setDatePickerVisible(false);
+
+    const handleDateConfirm = (selectedDate: Date) => {
+        setDate(selectedDate);
+        closeDatePicker();
+    };
+
+    const handleCategorySelect = (selectedCategory: Category) => {
+        setCategory(selectedCategory);
+        setCategoryModalVisible(false);
+        // Optionally, you can pass data back or perform additional actions
+    };
 
     const accounts = [
         { id: '1', name: 'Cash', icon: 'cash-outline' },
@@ -40,58 +61,89 @@ export default function AddExpenseScreen() {
 
     return (
         <View className="flex-1 bg-darkBg px-4">
+            <CategoryPickerModal
+                visible={isCategoryModalVisible}
+                onCancel={() => setCategoryModalVisible(false)}
+                onSelect={handleCategorySelect}
+                selectedCategoryId={category?.id}
+            />
             {/* Content */}
             <View className="flex-1 mt-6">
-                {/* Transaction Amount */}
-                <View className="mb-4">
-                    <Text className="text-gray-300 mb-2">
-                        Transaction amount
-                    </Text>
-                    <TextInput
-                        className="bg-gray-800 text-white rounded-lg px-4 py-3"
-                        placeholder="Enter Amount"
-                        placeholderTextColor="#A0AEC0"
-                        keyboardType="numeric"
-                        value={amount}
-                        onChangeText={setAmount}
-                    />
-                </View>
+                <PrimaryInput
+                    onChangeText={setAmount}
+                    placeholder="Enter Title"
+                    value={amount}
+                    label="Title"
+                    placeholderTextColor="#A0AEC0"
+                />
+                <PrimaryInput
+                    onChangeText={setAmount}
+                    placeholder="Enter Amount"
+                    value={amount}
+                    keyboardType="numeric"
+                    label="Transaction amount"
+                    placeholderTextColor="#A0AEC0"
+                />
 
                 {/* Transaction Category */}
                 <View className="mb-4">
-                    <Text className="text-gray-300 mb-2">
-                        Transaction category
+                    <Text className="text-gray-400 text-sm mb-2">
+                        Transaction Category
                     </Text>
                     <TouchableOpacity
-                        className="bg-gray-800 flex-row justify-between items-center rounded-lg px-4 py-3"
-                        onPress={() => alert('Select category action')}
+                        onPress={() => setCategoryModalVisible(true)}
+                        className="bg-gray-800 rounded-md px-4 py-3 flex-row items-center justify-between"
                     >
-                        <Text className="text-white">
-                            {category || 'Select Category'}
-                        </Text>
+                        <View className="flex-row items-center">
+                            {category && (
+                                <Ionicons
+                                    name={category.icon as any}
+                                    size={24}
+                                    className="text-white mr-2"
+                                />
+                            )}
+                            <Text className="text-white">
+                                {category ? category.name : 'Choose a category'}
+                            </Text>
+                        </View>
                         <Ionicons
                             name="chevron-down-outline"
-                            size={20}
-                            color="white"
+                            size={24}
+                            className="text-gray-400"
                         />
                     </TouchableOpacity>
                 </View>
 
-                {/* Transaction Date */}
                 <View className="mb-4">
-                    <Text className="text-gray-300 mb-2">Transaction date</Text>
+                    <Text className="text-gray-400 text-sm mb-2">
+                        Transaction Date
+                    </Text>
                     <TouchableOpacity
-                        className="bg-gray-800 flex-row justify-between items-center rounded-lg px-4 py-3"
-                        onPress={() => alert('Date picker action')}
+                        onPress={() => setDatePickerVisible(true)} // Open Date Picker
+                        className="bg-gray-800 rounded-md px-4 py-3"
                     >
-                        <Text className="text-white">{date}</Text>
-                        <Ionicons
-                            name="calendar-outline"
-                            size={20}
-                            color="white"
-                        />
+                        <Text className="text-white">
+                            {date.toDateString()}
+                        </Text>
                     </TouchableOpacity>
                 </View>
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    value={date}
+                    onConfirm={handleDateConfirm}
+                    onCancel={closeDatePicker}
+                />
+
+                <PrimaryInput
+                    onChangeText={setAmount}
+                    placeholder="Enter Amount"
+                    value={amount}
+                    keyboardType="numeric"
+                    label="Description"
+                    multiline
+                    placeholderTextColor="#A0AEC0"
+                />
 
                 {/* Transaction Account */}
                 <View className="mb-4">

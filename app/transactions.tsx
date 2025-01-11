@@ -1,72 +1,95 @@
+import TransactionCard from '@/src/components/screens/Home/TransactionCard';
 import { useGetExpensesQuery } from '@/src/redux/expense/expenseApi';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-const transactions = [
+type Transaction = {
+    id: string;
+    title: string;
+    category: string;
+    amount: string;
+    color: string;
+    expenseType: string;
+    icon:
+        | 'fast-food-outline'
+        | 'wallet-outline'
+        | 'tv-outline'
+        | 'trending-up-outline';
+};
+
+const transactions: Transaction[] = [
     {
         id: '1',
-        title: 'Food',
-        category: 'Expense',
-        amount: '-$50.00',
-        color: 'text-red-500',
+        title: 'Lunch at Subway', // Transaction title
+        category: 'Food', // Category of the transaction
+        expenseType: 'Expense', // Expense or Income type
+        amount: '- $50.00',
+        color: 'red',
         icon: 'fast-food-outline',
     },
     {
         id: '2',
-        title: 'Salary',
-        category: 'Income',
-        amount: '+$200.00',
-        color: 'text-teal-500',
+        title: 'Monthly Salary', // Transaction title
+        category: 'Salary', // Category of the transaction
+        expenseType: 'Income', // Expense or Income type
+        amount: '+ $200.00',
+        color: 'teal',
         icon: 'wallet-outline',
     },
     {
         id: '3',
-        title: 'Entertainment',
-        category: 'Expense',
-        amount: '-$40.00',
-        color: 'text-red-500',
+        title: 'Netflix Subscription', // Transaction title
+        category: 'Entertainment', // Category of the transaction
+        expenseType: 'Expense', // Expense or Income type
+        amount: '- $40.00',
+        color: 'red',
         icon: 'tv-outline',
     },
     {
         id: '4',
-        title: 'Investment',
-        category: 'Income',
-        amount: '+$100.00',
-        color: 'text-teal-500',
+        title: 'Stock Returns', // Transaction title
+        category: 'Investment', // Category of the transaction
+        expenseType: 'Income', // Expense or Income type
+        amount: '+ $100.00',
+        color: 'teal',
         icon: 'trending-up-outline',
     },
     {
         id: '5',
-        title: 'Fitness',
-        category: 'Expense',
-        amount: '-$100.00',
-        color: 'text-red-500',
-        icon: 'barbell-outline',
-    },
-    {
-        id: '6',
-        title: 'Savings',
-        category: 'Income',
-        amount: '+$150.00',
-        color: 'text-teal-500',
-        icon: 'piggy-bank-outline',
-    },
-    {
-        id: '7',
-        title: 'Food',
-        category: 'Expense',
-        amount: '-$150.00',
-        color: 'text-red-500',
+        title: 'Lunch at Subway', // Transaction title
+        category: 'Food', // Category of the transaction
+        expenseType: 'Expense', // Expense or Income type
+        amount: '- $50.00',
+        color: 'red',
         icon: 'fast-food-outline',
     },
     {
+        id: '6',
+        title: 'Monthly Salary', // Transaction title
+        category: 'Salary', // Category of the transaction
+        expenseType: 'Income', // Expense or Income type
+        amount: '+ $200.00',
+        color: 'teal',
+        icon: 'wallet-outline',
+    },
+    {
+        id: '7',
+        title: 'Netflix Subscription', // Transaction title
+        category: 'Entertainment', // Category of the transaction
+        expenseType: 'Expense', // Expense or Income type
+        amount: '- $40.00',
+        color: 'red',
+        icon: 'tv-outline',
+    },
+    {
         id: '8',
-        title: 'Investment',
-        category: 'Income',
-        amount: '+$400.00',
-        color: 'text-teal-500',
+        title: 'Stock Returns', // Transaction title
+        category: 'Investment', // Category of the transaction
+        expenseType: 'Income', // Expense or Income type
+        amount: '+ $100.00',
+        color: 'teal',
         icon: 'trending-up-outline',
     },
 ];
@@ -93,33 +116,14 @@ export default function RecentTransactions() {
             <FlatList
                 data={transactions}
                 keyExtractor={(item) => item.id}
+                ItemSeparatorComponent={() => <View className="h-4" />}
                 renderItem={({ item }) => (
-                    <TouchableOpacity
+                    <TransactionCard
+                        transaction={item}
                         onPress={() => {
                             router.push('/transactionsDetails');
                         }}
-                    >
-                        <View className="flex-row items-center bg-gray-800 rounded-lg p-4 mb-4">
-                            <Ionicons
-                                name={item.icon as any}
-                                size={28}
-                                className="text-white"
-                            />
-                            <View className="flex-1 mx-4">
-                                <Text className="text-white text-base font-bold">
-                                    {item.title}
-                                </Text>
-                                <Text className="text-gray-400 text-sm">
-                                    {item.category}
-                                </Text>
-                            </View>
-                            <Text
-                                className={`text-base font-bold ${item.color}`}
-                            >
-                                {item.amount}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+                    />
                 )}
             />
         </View>
