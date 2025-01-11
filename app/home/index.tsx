@@ -1,3 +1,5 @@
+import TransactionCard from '@/src/components/screens/Home/TransactionCard';
+import TransactionTypeAmountCard from '@/src/components/screens/Home/TransactionTypeAmountCard';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -11,6 +13,8 @@ export default function HomeScreen() {
         category: string;
         amount: string;
         color: string;
+        expenseType: string;
+        description: string;
         icon:
             | 'fast-food-outline'
             | 'wallet-outline'
@@ -21,34 +25,42 @@ export default function HomeScreen() {
     const transactions: Transaction[] = [
         {
             id: '1',
-            title: 'Food',
-            category: 'Expense',
+            title: 'Lunch at Subway', // Transaction title
+            category: 'Food', // Category of the transaction
+            expenseType: 'Expense', // Expense or Income type
             amount: '- $50.00',
             color: 'red',
+            description: 'Lunch with friends am at subway',
             icon: 'fast-food-outline',
         },
         {
             id: '2',
-            title: 'Salary',
-            category: 'Income',
+            title: 'Monthly Salary', // Transaction title
+            category: 'Salary', // Category of the transaction
+            expenseType: 'Income', // Expense or Income type
             amount: '+ $200.00',
             color: 'teal',
+            description: 'Monthly salary from company',
             icon: 'wallet-outline',
         },
         {
             id: '3',
-            title: 'Entertainment',
-            category: 'Expense',
+            title: 'Netflix Subscription', // Transaction title
+            category: 'Entertainment', // Category of the transaction
+            expenseType: 'Expense', // Expense or Income type
             amount: '- $40.00',
             color: 'red',
+            description: 'Monthly subscription of netflix',
             icon: 'tv-outline',
         },
         {
             id: '4',
-            title: 'Investment',
-            category: 'Income',
+            title: 'Stock Returns', // Transaction title
+            category: 'Investment', // Category of the transaction
+            expenseType: 'Income', // Expense or Income type
             amount: '+ $100.00',
             color: 'teal',
+            description: 'Stock returns from investment',
             icon: 'trending-up-outline',
         },
     ];
@@ -85,24 +97,12 @@ export default function HomeScreen() {
                 This month
             </Text>
             <View className="flex-row justify-between mb-6">
-                <View className="bg-gray-800 rounded-md p-4 flex-1 mx-1">
-                    <Text className="text-gray-400 text-sm">Income</Text>
-                    <Text className="text-white text-lg font-bold">
-                        $500.00
-                    </Text>
-                </View>
-                <View className="bg-gray-800 rounded-md p-4 flex-1 mx-1">
-                    <Text className="text-gray-400 text-sm">Expense</Text>
-                    <Text className="text-white text-lg font-bold">
-                        $500.00
-                    </Text>
-                </View>
-                <View className="bg-gray-800 rounded-md p-4 flex-1 mx-1">
-                    <Text className="text-gray-400 text-sm">Total Balance</Text>
-                    <Text className="text-white text-lg font-bold">
-                        $500.00
-                    </Text>
-                </View>
+                <TransactionTypeAmountCard amount={'$500.00'} type={'Income'} />
+                <TransactionTypeAmountCard
+                    amount={'$500.00'}
+                    type={'Expense'}
+                />
+                <TransactionTypeAmountCard amount={'$500.00'} type={'Total'} />
             </View>
 
             {/* Recent Transactions */}
@@ -124,28 +124,15 @@ export default function HomeScreen() {
                 <FlatList
                     data={transactions}
                     renderItem={({ item }) => (
-                        <View className="flex-row justify-between items-center bg-gray-800 rounded-md p-4 mb-3">
-                            <Ionicons
-                                name={item.icon}
-                                size={28}
-                                color={item.color}
-                            />
-                            <View className="flex-1 mx-4">
-                                <Text className="text-white text-sm font-bold">
-                                    {item.title}
-                                </Text>
-                                <Text className="text-gray-400 text-xs">
-                                    {item.category}
-                                </Text>
-                            </View>
-                            <Text
-                                className={`text-sm font-bold ${item.color === 'red' ? 'text-red-400' : 'text-teal-400'}`}
-                            >
-                                {item.amount}
-                            </Text>
-                        </View>
+                        <TransactionCard
+                            transaction={item}
+                            onPress={() => {
+                                router.push('/transactionsDetails');
+                            }}
+                        />
                     )}
                     keyExtractor={(item) => item.id}
+                    ItemSeparatorComponent={() => <View className="h-2" />}
                 />
             </View>
 

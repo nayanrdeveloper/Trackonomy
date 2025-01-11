@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import PrimaryButton from '../common/PrimaryButton';
+import PrimaryButton from '../../common/PrimaryButton';
 
 interface BudgetEmptyStateProps {
     onSetBudget: () => void;

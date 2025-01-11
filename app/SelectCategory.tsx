@@ -48,7 +48,7 @@ export default function SelectCategory() {
         setSelectedCategory(category);
         router.replace({
             pathname: '/editTransaction',
-            params: { selectedCategory: category }, // Pass selected category back
+            params: { selectedCategory: category },
         });
     };
 

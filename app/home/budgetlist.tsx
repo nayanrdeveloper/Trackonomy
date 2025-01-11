@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { View, FlatList, Text, TouchableOpacity } from 'react-native';
 import DropdownMenu from '@/src/components/common/DropdownMenu';
 import { useRouter } from 'expo-router';
-import BudgetEmptyState from '@/src/components/screens/BudgetEmptyState';
 import { Ionicons } from '@expo/vector-icons';
-import BudgetCard from '@/src/components/screens/BudgetCard';
+import BudgetEmptyState from '@/src/components/screens/Budget/BudgetEmptyState';
+import BudgetCard from '@/src/components/screens/Budget/BudgetCard';
 
 const budgets = [
     {

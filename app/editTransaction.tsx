@@ -1,4 +1,5 @@
 import DateTimePickerModal from '@/src/components/common/modals/DateTimePickerModal';
+import PrimaryInput from '@/src/components/common/PrimaryInput';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRouter } from 'expo-router';
@@ -18,6 +19,9 @@ export default function EditTransaction() {
     const router = useRouter();
     const [isModalVisible, setModalVisible] = useState(false);
     const [amount, setAmount] = useState('$50');
+    const [description, setDescription] = useState(
+        'Lunch with friends am at subway',
+    );
     const [category, setCategory] = useState('Food');
     const [type, setType] = useState('Expense');
     const [date, setDate] = useState(new Date('2024-07-12'));
@@ -242,6 +246,18 @@ export default function EditTransaction() {
                     onConfirm={handleDateConfirm}
                     onCancel={closeDatePicker}
                 />
+
+                <View className="mb-4">
+                    <Text className="text-gray-400 text-sm mb-2">
+                        Description
+                    </Text>
+                    <PrimaryInput
+                        onChangeText={setDescription}
+                        value={description}
+                        multiline={true}
+                        placeholder="Enter description"
+                    />
+                </View>
 
                 {/* Transaction Account */}
                 <View className="mb-6">

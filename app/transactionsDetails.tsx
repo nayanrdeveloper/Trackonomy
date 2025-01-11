@@ -1,3 +1,4 @@
+import TransactionDetailItem from '@/src/components/screens/Home/TransactionDetailItem';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -28,12 +29,13 @@ export default function TransactionDetail() {
             </View>
 
             {/* Card */}
-            <View className="bg-gray-800 rounded-lg p-4 flex-row items-center justify-between mb-6">
+            <View className="bg-[#2C2C33] rounded-lg p-4 flex-row items-center justify-between mb-6">
                 <View className="flex-row items-center">
                     <Ionicons
                         name="fast-food-outline"
                         size={32}
-                        className="text-white"
+                        color={'white'}
+                        className="text-white bg-[#36363D] p-3 rounded-lg"
                     />
                     <View className="ml-4">
                         <Text className="text-white text-lg font-bold">
@@ -42,7 +44,7 @@ export default function TransactionDetail() {
                         <Text className="text-gray-400 text-sm">Expense</Text>
                     </View>
                 </View>
-                <View className="flex-row space-x-4">
+                <View className="flex flex-row gap-x-3">
                     <TouchableOpacity
                         onPress={() => {
                             router.push('/editTransaction');
@@ -51,49 +53,42 @@ export default function TransactionDetail() {
                         <Ionicons
                             name="create-outline"
                             size={24}
-                            className="text-teal-500"
+                            color={'white'}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setModalVisible(true)}>
                         <Ionicons
                             name="trash-outline"
                             size={24}
-                            className="text-red-500"
+                            color={'white'}
                         />
                     </TouchableOpacity>
                 </View>
             </View>
 
             {/* Details */}
-            <View className="bg-gray-800 rounded-lg p-4 space-y-4">
-                <View>
-                    <Text className="text-gray-400 text-sm">
-                        Transaction Type
-                    </Text>
-                    <Text className="text-white text-base">Expense</Text>
-                </View>
-                <View>
-                    <Text className="text-gray-400 text-sm">
-                        Transaction Category
-                    </Text>
-                    <Text className="text-white text-base">Food</Text>
-                </View>
-                <View>
-                    <Text className="text-gray-400 text-sm">
-                        Transaction Date
-                    </Text>
-                    <Text className="text-white text-base">12 Jan 2024</Text>
-                </View>
-                <View>
-                    <Text className="text-gray-400 text-sm">
-                        Transaction Account
-                    </Text>
-                    <Text className="text-white text-base">Cash</Text>
-                </View>
-                <View>
-                    <Text className="text-gray-400 text-sm">Amount</Text>
-                    <Text className="text-white text-base">$50.00</Text>
-                </View>
+            <View className="flex flex-col gap-y-4">
+                <TransactionDetailItem
+                    title="Transaction Type"
+                    value="Expense"
+                />
+                <TransactionDetailItem
+                    title="Transaction Category"
+                    value="Food"
+                />
+                <TransactionDetailItem
+                    title="Transaction Date"
+                    value="12 Jan 2024"
+                />
+                <TransactionDetailItem
+                    title="Transaction Account"
+                    value="Cash"
+                />
+                <TransactionDetailItem title="Amount" value="$50.00" />
+                <TransactionDetailItem
+                    title="Description"
+                    value="Lunch at Subway free treat for completing the project milestone with the team. Enjoyed a variety of sandwiches and drinks."
+                />
             </View>
 
             <Modal
